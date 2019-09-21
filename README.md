@@ -4,11 +4,10 @@ Execute code in [worker threads](https://nodejs.org/api/worker_threads.html) wit
 
 ## Features
 
-- A worker can execute multiple jobs in parallel in the same thread.
+- A worker can execute multiple jobs in parallel in the same thread. Async is supported
 - Queue scheduling is batched through tick intervals. This optimizes the call-stack size and CPU usage, also with many short-living tasks.
 - Ability to kill specific workers.
 - Data serialization is done natively from Node.js
-- The job() method returns the worker that executed the job, which can then be used to get the job result.
 
 ---
 
@@ -20,13 +19,13 @@ const { start, job } = require('parallelcode');
 (async () => {
   await start();
   
-  const worker = await job(async ({ data }) => {
+  const ctx = await job(async ({ data }) => {
     return `Hello ${data.text}!`;
   }, {
     data: { text: "world" }
   });
 
-  const { result } = await worker.onDone;
+  const { result } = await ctx.onDone;
   console.log(result); // Hello world!
 })();
 ```
@@ -34,33 +33,36 @@ const { start, job } = require('parallelcode');
 ## API
 
 ```javascript
-start([options = {}]): Promise
+start([options: Object]): Promise
 ```
 
-Initialize the thread pool
+Initialize the thread pool.
+
+Options:
+ - `workers` = Number of workers to spawn (defaults to CPUs number)
+
+ - `concurrentJobs` = Number of jobs that a worker can execute in parallel (defaults to 10)
+
+- `errorLogger` = Called when an error is occured for logging purposes (by default, console.error is used)
+
+- `tickIntervalTime` = Time in ms between every tick (defaults to 100)
 
 ---
 
 ```javascript
-job(method: Function, config: Object): Promise
+job(method: Function, config: Object): Promise<Object>
 ```
 
 Enqueue a function that will be executed in a thread.
 
-The config may have a data object, that will be passed to the function. Data is natively serialized, according to the [HTML structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm).
 
-Events:
-  - **start -> (worker)**
+Config options:
 
-    Emitted when a worker picks up a job.
-    
-  - **done -> (result, context)**
-  
-    Emitted when the job has finished its execution. Context is an object containing worker info.
+  - `data` = Object that will be passed to the function executed inside the worker. Data is natively serialized, according to the [HTML structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm).
 
-  - **error -> (err, context)**
+  - `props` = Anything here will be stored into the job object. This will not be passed to the worker.
 
-    Emitted on job errors or when the worker has been killed
+Returned object has the `job` and `worker` data and the `onDone` promise.
 
 ---
 

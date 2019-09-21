@@ -4,8 +4,8 @@
   "description": "Execute code in a Node.js worker threads pool for fast and parallel execution time",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "coverage": "jest --coverage"
+    "test": "node  --experimental-worker ./node_modules/jest/bin/jest.js",
+    "coverage": "node  --experimental-worker ./node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [
     "worker",
