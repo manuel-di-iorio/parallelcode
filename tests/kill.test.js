@@ -10,7 +10,6 @@ afterEach(free);
 test('should kill the specific worker', async () => {
   const { worker: poolWorker } = await job(() => (new Promise(resolve => setTimeout(resolve, 99999))));
   await kill(poolWorker.id);
-  // const killedWorker = pool.get(poolWorker.id);
   expect(poolWorker.jobs.size).toBe(0);
   expect(poolWorker.worker).toBe(null);
 });

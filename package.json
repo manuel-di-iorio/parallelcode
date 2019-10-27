@@ -1,11 +1,11 @@
 {
   "name": "parallelcode",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Execute code in a Node.js worker threads pool for fast and parallel execution time",
   "main": "index.js",
   "scripts": {
-    "test": "node  --experimental-worker ./node_modules/jest/bin/jest.js",
-    "coverage": "node  --experimental-worker ./node_modules/jest/bin/jest.js --coverage"
+    "test": "node  ./node_modules/jest/bin/jest.js",
+    "coverage": "node  ./node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [
     "worker",

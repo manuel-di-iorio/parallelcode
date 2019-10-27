@@ -8,6 +8,7 @@ Execute code in [worker threads](https://nodejs.org/api/worker_threads.html) wit
 - Queue scheduling is batched through tick intervals. This optimizes the call-stack size and CPU usage, also with many short-living tasks.
 - Ability to kill specific workers.
 - Data serialization is done natively from Node.js
+- Can execute a starting function to persist things like database connection or initial state. This is executed once inside the threads before any other jobs.
 
 ---
 
@@ -46,6 +47,8 @@ Options:
 - `errorLogger` = Called when an error is occured for logging purposes (by default, console.error is used)
 
 - `tickIntervalTime` = Time in ms between every tick (defaults to 100)
+
+- `onThreadStart` = Job function to execute once inside the thread when it just spawned
 
 ---
 
