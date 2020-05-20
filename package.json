@@ -1,6 +1,6 @@
 {
   "name": "parallelcode",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Execute code in a Node.js worker threads pool for fast and parallel execution time",
   "main": "index.js",
   "scripts": {
@@ -18,8 +18,8 @@
   "author": "manuel-di-iorio",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^24.9.0",
-    "semistandard": "^14.1.0"
+    "jest": "^26.0.1",
+    "semistandard": "^14.2.0"
   },
   "engines": {
     "node": ">10.5"
