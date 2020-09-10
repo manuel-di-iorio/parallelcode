@@ -31,6 +31,12 @@ const { start, job } = require('parallelcode');
 })();
 ```
 
+## Installation
+
+```bash
+npm install parallelcode
+```
+
 ## API
 
 ```javascript

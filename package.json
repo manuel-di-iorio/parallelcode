@@ -18,8 +18,8 @@
   "author": "manuel-di-iorio",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^26.0.1",
-    "semistandard": "^14.2.0"
+    "jest": "^26.4.2",
+    "semistandard": "^14.2.3"
   },
   "engines": {
     "node": ">10.5"
