@@ -1,3 +1,8 @@
+# UNMAINTENED
+Please look at alternatives like https://github.com/piscinajs/piscina
+
+---
+
 # Parallel Code
 
 Execute code in [worker threads](https://nodejs.org/api/worker_threads.html) with a [thread pool](https://en.wikipedia.org/wiki/Thread_pool). A set of threads are spawned at the start and respawned if killed, ensuring fast execution times. New jobs are queued and immediately executed in the first available worker, then the worker is moved to the end of the pool, to distribuite work load.
